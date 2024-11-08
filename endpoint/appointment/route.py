@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from data.db.models import Appointment
 
 from endpoint.appointment.entity import ReadAppointment, CreateAppointment
-from endpoint.appointment.repository import create_appointment, get_appointment, get_appointments, delete_appointment
+from endpoint.appointment.repository import create_appointment, get_appointment, get_appointments, delete_appointment, get_every_appointments
 import requests
 import json
 import dotenv
@@ -22,6 +22,13 @@ router = APIRouter(
 @router.get("/")
 async def root():
     return {}
+
+
+@router.get("/list")
+async def list_every_appointment() -> list[ReadAppointment]:    # 특정 학생 예약 정보 열람
+    appointments = await get_every_appointments()
+
+    return appointments
 
 
 @router.get("/list/{student_id}")

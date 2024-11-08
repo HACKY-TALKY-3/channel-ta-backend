@@ -39,6 +39,18 @@ async def get_appointments(student_id: int, session: AsyncSession = None) -> lis
 
 
 @Transactional()
+async def get_every_appointments(session: AsyncSession = None) -> list[Appointment]:
+    stmt = (
+        select(Appointment)
+    )
+
+    res = await session.execute(stmt)
+
+    return res.scalars().all()
+
+
+
+@Transactional()
 async def delete_appointment(appointment_id: int, session: AsyncSession = None) -> None:
     stmt = (
         delete(Appointment)
