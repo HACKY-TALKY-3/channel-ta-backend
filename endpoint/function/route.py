@@ -25,6 +25,7 @@ def get_function_calling(notes: Method) -> dict:
     method = notes.method
 
     if method == 'helloWorld':
+        print('Hello World')
         chat_id = notes.params['chat']['id']
 
         channel_id = notes.context.channel['id']
@@ -55,23 +56,27 @@ def get_function_calling(notes: Method) -> dict:
                 },
             }
         }
-
+        """
         response = requests.put(
             url='https://app-store-api.channel.io/general/v1/native/functions',
             headers=header,
             data=json.dumps(data)
-        )
-
-        print(response.json())
+        )"""
 
         response = {
-            "type": "wam",
-            "attributes": {
-                "appId": "app id",
-                "name": "name of the wam",
-                "wamArgs": {}
-	        }
+            "result": {
+	            "type": "wam",
+	            "attributes": {
+		            "appId": "672de9020f106cc23eb2",
+		            "name": "tutorial",
+		            "wamArgs": {
+			            "message": "This is a test message sent by a manager.",
+			            "managerId": "caller.id"
+		            }
+                }
+            }
         }
+
 
     return response
 

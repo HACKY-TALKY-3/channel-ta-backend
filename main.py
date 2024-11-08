@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from endpoint.function.route import router as function_router
+from endpoint.appointment.route import router as appointment_router
 app = FastAPI()
 
 
@@ -16,6 +17,7 @@ async def say_hello(name: str):
 
 
 app.include_router(function_router)
+app.include_router(appointment_router)
 
 
 
